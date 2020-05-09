@@ -5,22 +5,19 @@ import java.util.Random;
 
 public class Main {
 
-    // Guessing algorithm idea:
-    // Ask for higher lower, add certain number and then always add half number recursively
-    // Approach correct answer
-
     public static void main(String[] args) {
 
         Scanner scanner1 = new Scanner(System.in);
 
         int number;
         do {
-            System.out.println("Enter a number between 0 - 100");
+            System.out.println("Enter a number between 0 - 99");
             number = scanner1.nextInt();
         } while (number <= 0 || number >= 100);
 
-        Random random = new Random();
-        int guess = random.nextInt(100);
+        int floor = 1;
+        int ceiling = 100;
+        int guess = (ceiling + floor) / 2;
 
         System.out.println("number: " + number + " and my guess equals: " + guess);
 
@@ -31,27 +28,16 @@ public class Main {
             String answer = scanner2.nextLine();
 
             if (answer.equals("h")) {
-                guess++;
+                floor = guess;
+                guess = (ceiling + floor) / 2;
                 System.out.println(guess + "?");
             } else if (answer.equals("l")) {
-                guess--;
+                ceiling = guess;
+                guess = (ceiling + floor) / 2;
                 System.out.println(guess + "?");
             }
 
         } while (number != guess);
         System.out.println("I've guessed your number!");
     }
-
-    /*
-    private void validNumber() {
-
-        Scanner scanner = new Scanner(System.in);
-
-        int guess;
-        do {
-            System.out.println("Enter a number between 0 - 100");
-            guess = scanner.nextInt();
-        } while (guess >= 0 && guess <= 100);
-    }
-    */
 }
